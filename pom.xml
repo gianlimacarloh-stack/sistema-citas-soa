@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- POM agregador: permite compilar los 3 servicios con un solo "mvn clean package" -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pe.edu.idat</groupId>
+    <artifactId>sistema-citas-soa</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>sistema-citas-soa</name>
+
+    <modules>
+        <module>servicio-clientes-soap</module>
+        <module>servicio-tecnicos-soap</module>
+        <module>servicio-citas-rest</module>
+    </modules>
+</project>

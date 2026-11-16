@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contrato del Servicio de Tecnicos de MYA Electric. Fechas en formato yyyy-MM-dd y horas HH:mm. El WSDL se genera a partir de este XSD. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://idat.edu.pe/tecnicos"
+           targetNamespace="http://idat.edu.pe/tecnicos"
+           elementFormDefault="qualified">
+
+    <!-- consultarDisponibilidad(tipoServicio, fecha) -> disponible, horariosLibres (lista) -->
+    <xs:element name="consultarDisponibilidadRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tipoServicio" type="xs:string"/>
+                <xs:element name="fecha" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="consultarDisponibilidadResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="disponible" type="xs:boolean"/>
+                <xs:element name="horariosLibres" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- asignarTecnico(tipoServicio, fecha, hora) -> exito, idTecnico, nombreTecnico, mensaje -->
+    <xs:element name="asignarTecnicoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="tipoServicio" type="xs:string"/>
+                <xs:element name="fecha" type="xs:string"/>
+                <xs:element name="hora" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="asignarTecnicoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="exito" type="xs:boolean"/>
+                <xs:element name="idTecnico" type="xs:string"/>
+                <xs:element name="nombreTecnico" type="xs:string"/>
+                <xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- NUEVO en Entregable 2: liberarHorario(idTecnico, fecha, hora) -> exito, mensaje. Se usa al cancelar una cita. -->
+    <xs:element name="liberarHorarioRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idTecnico" type="xs:string"/>
+                <xs:element name="fecha" type="xs:string"/>
+                <xs:element name="hora" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="liberarHorarioResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="exito" type="xs:boolean"/>
+                <xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

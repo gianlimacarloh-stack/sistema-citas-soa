@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://idat.edu.pe/clientes">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:validarClienteRequest>
+         <cli:dni>70123456</cli:dni>
+      </cli:validarClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,428 @@
+{
+  "info": {
+    "name": "Sistema de citas SOA - M&A Electric",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Pruebas del servicio REST de Citas y de los servicios SOAP de Clientes y Tecnicos. Use fechas futuras (lunes a sabado)."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "REST - Citas (8080)",
+      "item": [
+        {
+          "name": "1. Listar tipos de servicio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "2. Ver horarios libres",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/servicios/MANTENIMIENTO/disponibilidad?fecha=2026-11-20",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "servicios",
+                "MANTENIMIENTO",
+                "disponibilidad"
+              ],
+              "query": [
+                {
+                  "key": "fecha",
+                  "value": "2026-11-20"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "3. Reservar cita - cliente registrado (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dni\": \"70123456\",\n  \"tipoServicio\": \"MANTENIMIENTO\",\n  \"fecha\": \"2026-11-20\",\n  \"hora\": \"10:00\",\n  \"descripcion\": \"Mantenimiento de grupo electrogeno Hyundai 10 kVA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "4. Reservar cita - cliente nuevo se registra (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dni\": \"71234567\",\n  \"nombre\": \"Rosa Mendoza\",\n  \"telefono\": \"999111222\",\n  \"direccion\": \"Av. Peru 450, San Martin de Porres\",\n  \"tipoServicio\": \"REPARACION\",\n  \"fecha\": \"2026-11-20\",\n  \"hora\": \"10:00\",\n  \"descripcion\": \"El generador no arranca\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "5. Reservar en domingo - sin tecnico (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dni\": \"70123456\",\n  \"tipoServicio\": \"INSTALACION\",\n  \"fecha\": \"2026-11-22\",\n  \"hora\": \"10:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "6. Datos invalidos (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dni\": \"123\",\n  \"tipoServicio\": \"PINTURA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "7. Consultar cita",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas/101",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas",
+                "101"
+              ]
+            }
+          }
+        },
+        {
+          "name": "8. Listar citas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "9. Cancelar cita (200)",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas/101/cancelar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas",
+                "101",
+                "cancelar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "10. Cita inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/citas/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "citas",
+                "999"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SOAP - Clientes (8081)",
+      "item": [
+        {
+          "name": "validarCliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cli=\"http://idat.edu.pe/clientes\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <cli:validarClienteRequest>\n         <cli:dni>70123456</cli:dni>\n      </cli:validarClienteRequest>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ws"
+              ]
+            }
+          }
+        },
+        {
+          "name": "registrarCliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:cli=\"http://idat.edu.pe/clientes\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <cli:registrarClienteRequest>\n         <cli:dni>71234567</cli:dni>\n         <cli:nombre>Rosa Mendoza</cli:nombre>\n         <cli:telefono>999111222</cli:telefono>\n         <cli:direccion>Av. Peru 450, San Martin de Porres</cli:direccion>\n      </cli:registrarClienteRequest>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8081/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "ws"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SOAP - Tecnicos (8082)",
+      "item": [
+        {
+          "name": "consultarDisponibilidad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tec=\"http://idat.edu.pe/tecnicos\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <tec:consultarDisponibilidadRequest>\n         <tec:tipoServicio>MANTENIMIENTO</tec:tipoServicio>\n         <tec:fecha>2026-11-20</tec:fecha>\n      </tec:consultarDisponibilidadRequest>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "ws"
+              ]
+            }
+          }
+        },
+        {
+          "name": "asignarTecnico",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tec=\"http://idat.edu.pe/tecnicos\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <tec:asignarTecnicoRequest>\n         <tec:tipoServicio>MANTENIMIENTO</tec:tipoServicio>\n         <tec:fecha>2026-11-20</tec:fecha>\n         <tec:hora>10:00</tec:hora>\n      </tec:asignarTecnicoRequest>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "ws"
+              ]
+            }
+          }
+        },
+        {
+          "name": "liberarHorario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tec=\"http://idat.edu.pe/tecnicos\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <tec:liberarHorarioRequest>\n         <tec:idTecnico>T02</tec:idTecnico>\n         <tec:fecha>2026-11-20</tec:fecha>\n         <tec:hora>10:00</tec:hora>\n      </tec:liberarHorarioRequest>\n   </soapenv:Body>\n</soapenv:Envelope>\n",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/ws",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "ws"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

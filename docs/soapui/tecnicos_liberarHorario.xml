@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tec="http://idat.edu.pe/tecnicos">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tec:liberarHorarioRequest>
+         <tec:idTecnico>T02</tec:idTecnico>
+         <tec:fecha>2026-11-20</tec:fecha>
+         <tec:hora>10:00</tec:hora>
+      </tec:liberarHorarioRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contrato del Servicio de Clientes de MYA Electric. El WSDL se genera a partir de este XSD. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://idat.edu.pe/clientes"
+           targetNamespace="http://idat.edu.pe/clientes"
+           elementFormDefault="qualified">
+
+    <!-- validarCliente(dni) -> existe, nombre, direccion -->
+    <xs:element name="validarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dni" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="validarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="existe" type="xs:boolean"/>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="direccion" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- registrarCliente(dni, nombre, telefono, direccion) -> exito, mensaje -->
+    <xs:element name="registrarClienteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dni" type="xs:string"/>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="telefono" type="xs:string"/>
+                <xs:element name="direccion" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="registrarClienteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="exito" type="xs:boolean"/>
+                <xs:element name="mensaje" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

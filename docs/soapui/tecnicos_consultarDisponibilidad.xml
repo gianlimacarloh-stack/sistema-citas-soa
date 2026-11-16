@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tec="http://idat.edu.pe/tecnicos">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tec:consultarDisponibilidadRequest>
+         <tec:tipoServicio>MANTENIMIENTO</tec:tipoServicio>
+         <tec:fecha>2026-11-20</tec:fecha>
+      </tec:consultarDisponibilidadRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

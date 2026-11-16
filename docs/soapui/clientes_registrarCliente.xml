@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cli="http://idat.edu.pe/clientes">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cli:registrarClienteRequest>
+         <cli:dni>71234567</cli:dni>
+         <cli:nombre>Rosa Mendoza</cli:nombre>
+         <cli:telefono>999111222</cli:telefono>
+         <cli:direccion>Av. Peru 450, San Martin de Porres</cli:direccion>
+      </cli:registrarClienteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
