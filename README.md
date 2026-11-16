@@ -27,10 +27,24 @@ siguiendo el diagrama BPMN [`docs/BPMN_Reservar_Cita.png`](docs/BPMN_Reservar_Ci
 ## Requisitos
 
 - **Java 17** o superior: `java -version`
-- **Maven 3.8+**: `mvn -v`. También se puede abrir el proyecto en IntelliJ IDEA, que ya trae Maven.
+- **Maven**: no hace falta instalarlo; el proyecto incluye `./mvnw` (Maven Wrapper).
 - **Postman** y/o **SoapUI** para las pruebas
 
 ## Cómo ejecutarlo
+
+### Forma más fácil (Mac): doble clic
+
+Solo necesitas tener **Java 17 o superior**. Si tienes Android Studio, el script usa el Java que trae incluido.
+
+1. Doble clic en **`iniciar.command`**. Compila y levanta los 3 servicios; la primera vez tarda unos minutos porque descarga las dependencias.
+   Deja esa ventana abierta: ahí verás cada paso del orquestador.
+2. Doble clic en **`probar.command`**. Ejecuta 11 pruebas (reservar, rechazar, cancelar, llamada SOAP directa...) y muestra las respuestas.
+3. Para detener todo, presiona **Enter** en la ventana de `iniciar.command`.
+
+> Si macOS dice que no puede abrir el archivo, haz clic derecho sobre él → **Abrir** → **Abrir**. También puedes
+> ejecutarlo en Terminal con `bash iniciar.command`.
+
+No hace falta instalar Maven: el proyecto incluye el *Maven Wrapper* (`./mvnw`).
 
 ### Opción A: terminal (3 terminales, una por servicio)
 
@@ -38,7 +52,7 @@ siguiendo el diagrama BPMN [`docs/BPMN_Reservar_Cita.png`](docs/BPMN_Reservar_Ci
 # 1) Clonar y compilar los 3 servicios desde la raíz
 git clone https://github.com/gianlimacarloh-stack/sistema-citas-soa.git
 cd sistema-citas-soa
-mvn clean package -DskipTests
+./mvnw clean package -DskipTests      # o: mvn clean package -DskipTests
 
 # 2) Terminal 1: Clientes (SOAP)
 java -jar servicio-clientes-soap/target/servicio-clientes-soap-1.0.0.jar
@@ -160,6 +174,8 @@ En la consola de Citas se ve la orquestación paso a paso:
 ## Estructura
 
 ```
+├── iniciar.command / probar.command          levantar y probar todo con doble clic (Mac)
+├── mvnw, .mvn/                               Maven Wrapper
 ├── docs/
 │   ├── BPMN_Reservar_Cita.png / .svg         BPMN actualizado
 │   ├── Sistema_Citas_SOA.postman_collection.json
